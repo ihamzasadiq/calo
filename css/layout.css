@@ -69,16 +69,18 @@ body {
 }
 
 .about-section-content {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(280px, 370px);
+  display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 34px 54px;
+  gap: 34px;
 }
 
 .about-copy {
+  width: 100%;
   display: flex;
   flex-direction: column;
   gap: 34px;
+  text-align: center;
 }
 
 .origin-story {
@@ -291,14 +293,6 @@ body {
 
   #portfolio-header {
     flex-direction: column;
-  }
-
-  .about-section-content {
-    grid-template-columns: 1fr;
-  }
-
-  .origin-story {
-    margin-top: 6px;
   }
 
   .project-card {
