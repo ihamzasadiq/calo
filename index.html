@@ -22,6 +22,8 @@
     <link rel="stylesheet" href="./css/typography.css">
     <link rel="stylesheet" href="./css/utilities.css">
 
+		<script defer src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
 		<script defer src="./js/script.js"></script>
 	</head>
 	<body>
@@ -65,11 +67,11 @@
           -->
         <div id="portfolio-header-text-container">
             <div class="header-text">
-              <span class="main-title">Hey, I'm @ndoherty_eth.</span>
+              <span class="main-title">Hey, I'm @hmzasadiq.</span>
               <div class="body-text">I’m a freelance designer and developer who aims to help other creatives build out their portfolios, skillset, and businesses.</div>
             </div>
-            <a class="button" id="my-work-link">
-              <span class="button-text">Check out my projects</span> 
+            <a class="button" href="https://www.linkedin.com/in/ihamzasadiq/" target="_blank" rel="noopener noreferrer">
+              <span class="button-text">Get in touch</span>
               <image src="./assets/icons/arrow-right.svg" class="right-arrow-icon"/>
             </a>
         </div>
@@ -85,8 +87,36 @@
       <div id="about-section">
         <span class="subheader-text">My Background / About Me</span>
         <div class="about-section-content">
-          <div class="body-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Tristique risus nec feugiat in fermentum. Sed id semper risus in hendrerit gravida. Placerat duis ultricies lacus sed. Id neque aliquam vestibulum morbi blandit cursus risus. Elit pellentesque habitant morbi tristique senectus et netus et. Elementum tempus egestas sed sed risus pretium quam. Nibh ipsum consequat nisl vel pretium lectus quam id leo. Vitae congue mauris rhoncus aenean vel elit.</div>
-          <div class="body-text">Vitae justo eget magna fermentum. Imperdiet nulla malesuada pellentesque elit eget gravida. Aliquet nec ullamcorper sit amet. Aliquet sagittis id consectetur purus. Ac tortor dignissim convallis aenean. Enim neque volutpat ac tincidunt vitae. Lobortis feugiat vivamus at augue. Platea dictumst vestibulum rhoncus est pellentesque elit ullamcorper. Viverra orci sagittis eu volutpat. Massa tincidunt nunc pulvinar sapien et ligula. Donec enim diam vulputate ut.</div>
+          <div class="about-copy">
+            <div class="body-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Tristique risus nec feugiat in fermentum. Sed id semper risus in hendrerit gravida. Placerat duis ultricies lacus sed. Id neque aliquam vestibulum morbi blandit cursus risus. Elit pellentesque habitant morbi tristique senectus et netus et. Elementum tempus egestas sed sed risus pretium quam. Nibh ipsum consequat nisl vel pretium lectus quam id leo. Vitae congue mauris rhoncus aenean vel elit.</div>
+            <div class="body-text">Vitae justo eget magna fermentum. Imperdiet nulla malesuada pellentesque elit eget gravida. Aliquet nec ullamcorper sit amet. Aliquet sagittis id consectetur purus. Ac tortor dignissim convallis aenean. Enim neque volutpat ac tincidunt vitae. Lobortis feugiat vivamus at augue. Platea dictumst vestibulum rhoncus est pellentesque elit ullamcorper. Viverra orci sagittis eu volutpat. Massa tincidunt nunc pulvinar sapien et ligula. Donec enim diam vulputate ut.</div>
+          </div>
+
+          <figure class="origin-story" aria-label="Fooreo origin story video">
+            <div class="origin-story-phone">
+              <div class="origin-story-video-window">
+                <video
+                  class="origin-story-video"
+                  muted
+                  loop
+                  playsinline
+                  preload="metadata"
+                  poster="./assets/images/fooreo-origin-story-poster.webp"
+                  aria-label="Hamza's Fooreo origin story video"
+                >
+                  <source src="./assets/video/fooreo-origin-story.mp4" type="video/mp4">
+                </video>
+                <button class="origin-story-sound is-muted" type="button" aria-label="Play with sound" aria-pressed="false">
+                  <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                    <path d="M4 10v4h4l5 4V6L8 10H4Z"></path>
+                    <path class="origin-story-sound-waves" d="M16 9.5a4 4 0 0 1 0 5M18.5 7a7 7 0 0 1 0 10"></path>
+                    <path class="origin-story-sound-slash" d="m4 4 16 16"></path>
+                  </svg>
+                </button>
+              </div>
+              <img class="origin-story-phone-art" src="./assets/images/fooreo-reel-frame.png" alt="" aria-hidden="true">
+            </div>
+          </figure>
         </div>
       </div>
 
