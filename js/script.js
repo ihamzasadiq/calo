@@ -1,6 +1,22 @@
-if (document.getElementById('my-work-link')) {
-  document.getElementById('my-work-link').addEventListener('click', () => {
-    document.getElementById('my-work-section').scrollIntoView({behavior: "smooth"})
+const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)')
+
+const navigationToggle = document.querySelector('.nav-toggle')
+const navigation = document.querySelector('.site-navigation')
+
+if (navigationToggle && navigation) {
+  const setNavigationState = (isOpen) => {
+    navigation.classList.toggle('is-open', isOpen)
+    navigationToggle.setAttribute('aria-expanded', String(isOpen))
+    navigationToggle.setAttribute('aria-label', isOpen ? 'Close navigation' : 'Open navigation')
+    navigationToggle.textContent = isOpen ? 'Close' : 'Menu'
+  }
+
+  navigationToggle.addEventListener('click', () => {
+    setNavigationState(!navigation.classList.contains('is-open'))
+  })
+
+  navigation.querySelectorAll('a').forEach((link) => {
+    link.addEventListener('click', () => setNavigationState(false))
   })
 }
 
@@ -10,62 +26,104 @@ if (originStory) {
   const video = originStory.querySelector('.origin-story-video')
   const phone = originStory.querySelector('.origin-story-phone')
   const soundButton = originStory.querySelector('.origin-story-sound')
-  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)')
+  let hasStarted = false
 
   const safelyPlayVideo = () => {
     const playAttempt = video.play()
 
     if (playAttempt) {
-      playAttempt.catch(() => {})
+      playAttempt.catch(() => {
+        originStory.dataset.autoplayBlocked = 'true'
+      })
     }
   }
 
   const updateSoundButton = () => {
     const isMuted = video.muted
     soundButton.classList.toggle('is-muted', isMuted)
-    soundButton.setAttribute('aria-label', isMuted ? 'Play with sound' : 'Mute video')
+    soundButton.setAttribute('aria-label', isMuted ? 'Play video with sound' : 'Mute video')
     soundButton.setAttribute('aria-pressed', String(!isMuted))
   }
 
-  soundButton.addEventListener('click', (event) => {
-    event.stopPropagation()
-    video.muted = !video.muted
-    updateSoundButton()
-    safelyPlayVideo()
-  })
-
-  video.addEventListener('click', () => {
-    if (video.muted) {
-      video.muted = false
-      updateSoundButton()
+  const startOrResumeVideo = () => {
+    if (video.ended) {
+      return
     }
 
+    hasStarted = true
     safelyPlayVideo()
-  })
+  }
 
   updateSoundButton()
 
-  if (!prefersReducedMotion.matches && window.gsap && window.ScrollTrigger) {
-    gsap.registerPlugin(ScrollTrigger)
-    gsap.set(phone, { autoAlpha: 0, y: 28 })
+  soundButton.addEventListener('click', () => {
+    video.muted = !video.muted
+    updateSoundButton()
+    startOrResumeVideo()
+  })
 
-    let hasRevealed = false
+  video.addEventListener('click', () => {
+    startOrResumeVideo()
+  })
 
-    ScrollTrigger.create({
-      trigger: phone,
-      start: 'top 65%',
-      end: 'bottom 35%',
-      onEnter: () => {
-        if (!hasRevealed) {
-          hasRevealed = true
-          gsap.to(phone, { autoAlpha: 1, duration: 0.65, ease: 'power2.out', y: 0 })
+  if (!prefersReducedMotion.matches && 'IntersectionObserver' in window) {
+    phone.classList.add('is-pending-reveal')
+
+    const storyObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          phone.classList.remove('is-pending-reveal')
+
+          if (!video.ended && (!hasStarted || video.paused)) {
+            startOrResumeVideo()
+          }
+        } else if (!video.paused) {
+          video.pause()
         }
+      })
+    }, { threshold: 0.45 })
 
-        safelyPlayVideo()
-      },
-      onEnterBack: safelyPlayVideo,
-      onLeave: () => video.pause(),
-      onLeaveBack: () => video.pause(),
-    })
+    storyObserver.observe(originStory)
   }
+}
+
+const lightbox = document.querySelector('.image-lightbox')
+const lightboxImage = lightbox?.querySelector('.lightbox-image')
+const lightboxClose = lightbox?.querySelector('.lightbox-close')
+let lightboxTrigger = null
+
+if (lightbox && lightboxImage && lightboxClose) {
+  document.querySelectorAll('[data-lightbox-source]').forEach((trigger) => {
+    trigger.addEventListener('click', () => {
+      lightboxTrigger = trigger
+      lightboxImage.src = trigger.dataset.lightboxSource
+      lightboxImage.alt = trigger.dataset.lightboxAlt || ''
+      lightbox.showModal()
+      lightboxClose.focus()
+    })
+  })
+
+  const closeLightbox = () => {
+    lightbox.close()
+  }
+
+  lightboxClose.addEventListener('click', closeLightbox)
+
+  lightbox.addEventListener('click', (event) => {
+    if (event.target === lightbox) {
+      closeLightbox()
+    }
+  })
+
+  lightbox.addEventListener('close', () => {
+    lightboxImage.removeAttribute('src')
+    lightboxImage.alt = ''
+    lightboxTrigger?.focus()
+  })
+}
+
+const currentYear = document.getElementById('current-year')
+
+if (currentYear) {
+  currentYear.textContent = new Date().getFullYear()
 }
