@@ -152,26 +152,37 @@ if (!prefersReducedMotion.matches && 'IntersectionObserver' in window && journey
     })
   }
 
-  const visibleJourneyItems = new Set()
+  const updateActiveJourneyItem = () => {
+    const viewportCenter = window.innerHeight / 2
+    const activeItem = Array.from(journeyItems).reduce((closestItem, item) => {
+      const marker = item.querySelector('.journey-number')
+      const itemCenter = (marker || item).getBoundingClientRect().top + (marker || item).getBoundingClientRect().height / 2
+      const closestMarker = closestItem.querySelector('.journey-number')
+      const closestCenter = (closestMarker || closestItem).getBoundingClientRect().top + (closestMarker || closestItem).getBoundingClientRect().height / 2
 
-  const journeyStateObserver = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        visibleJourneyItems.add(entry.target)
-      } else {
-        visibleJourneyItems.delete(entry.target)
-      }
+      return Math.abs(itemCenter - viewportCenter) < Math.abs(closestCenter - viewportCenter) ? item : closestItem
     })
 
-    const currentJourneyItems = Array.from(visibleJourneyItems)
-      .sort((first, second) => Math.abs(first.getBoundingClientRect().top) - Math.abs(second.getBoundingClientRect().top))
+    setActiveJourneyItem(activeItem)
+  }
 
-    if (currentJourneyItems.length) {
-      setActiveJourneyItem(currentJourneyItems[0])
+  let isJourneyUpdateQueued = false
+
+  const queueJourneyStateUpdate = () => {
+    if (isJourneyUpdateQueued) {
+      return
     }
-  }, { rootMargin: '-28% 0px -54% 0px', threshold: 0 })
 
-  journeyItems.forEach((item) => journeyStateObserver.observe(item))
+    isJourneyUpdateQueued = true
+    window.requestAnimationFrame(() => {
+      updateActiveJourneyItem()
+      isJourneyUpdateQueued = false
+    })
+  }
+
+  updateActiveJourneyItem()
+  window.addEventListener('scroll', queueJourneyStateUpdate, { passive: true })
+  window.addEventListener('resize', queueJourneyStateUpdate)
 } else if (journeyItems.length) {
   journeyItems[0].classList.add('is-active')
 }
