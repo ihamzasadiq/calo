@@ -7,6 +7,9 @@
     <meta name="description" content="A product story by Hamza Sadiq about building Fooreo, a meal-plan marketplace in Bahrain.">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Permanent+Marker&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./css/layout.css">
     <link rel="stylesheet" href="./css/typography.css">
     <link rel="stylesheet" href="./css/utilities.css">
@@ -27,25 +30,15 @@
         <div id="portfolio-header-text-container">
           <div class="header-text">
             <h1 class="main-title">Hey, I'm @hmzasadiq.</h1>
-            <p class="body-text">I didn’t discover the meal-plan problem through a job description. I experienced it as a customer, then left fintech to build in it.</p>
-          </div>
-          <div class="hero-actions">
-            <a class="button" href="#fooreo"><span class="button-text">Check out my projects</span><img src="./assets/icons/arrow-right.svg" class="right-arrow-icon" alt=""></a>
+            <p class="body-text">I'm a product Manager from Bahrain making useful things for the internet and exploring the world.</p>
           </div>
         </div>
       </header>
 
-      <section class="framing-section" aria-labelledby="framing-title">
-        <p class="eyebrow">The short version</p>
-        <h2 id="framing-title" class="section-title">One marketplace. More systems than the customer ever saw.</h2>
-        <p class="body-text section-copy">Fooreo started as a way to make meal plans easier to discover and manage. Building it meant working far beyond the consumer interface, across restaurant partners, subscriptions, scheduling, delivery, customer support and the operational tools behind the product.</p>
-      </section>
+      <a class="scroll-cue" href="#story">Scroll down <span aria-hidden="true">↓</span></a>
 
       <section id="story" class="video-story-section" aria-labelledby="video-story-title">
-        <div class="section-intro">
-          <p class="eyebrow">The commitment</p>
-          <h2 id="video-story-title" class="section-title">I left fintech to see this through.</h2>
-        </div>
+        <h2 id="video-story-title" class="commitment-title">The commitment</h2>
         <div class="video-story-layout">
           <figure class="origin-story">
             <div class="origin-story-phone">
@@ -143,13 +136,19 @@
 
       <section id="behind-the-app" class="operations-section" aria-labelledby="operations-title">
         <div class="operations-header">
-          <p class="eyebrow">Behind the app</p>
-          <h2 id="operations-title" class="section-title">What the customer never saw.</h2>
+          <h2 id="operations-title" class="section-title">What the customer never saw?</h2>
           <p class="body-text">The marketplace was the visible layer. Behind it were restaurant onboarding, plan and meal setup, subscription schedules, customer management, delivery coordination and the exceptions that appear once real orders begin moving through a system.</p>
         </div>
         <figure class="dashboard-figure">
           <button class="dashboard-open" type="button" data-lightbox-source="./assets/images/fooreo-owner-dashboard.jpg" data-lightbox-alt="Owner-facing Fooreo dashboard showing plan management, customers and subscription scheduling" aria-label="View the Fooreo owner dashboard larger">
-            <img src="./assets/images/fooreo-owner-dashboard.jpg" width="1366" height="629" loading="lazy" alt="Owner-facing Fooreo dashboard showing plan management, customers and subscription scheduling">
+            <span class="dashboard-mockup" aria-hidden="true">
+              <span class="dashboard-browser-chrome">
+                <span class="dashboard-browser-controls"><span></span><span></span><span></span></span>
+                <span class="dashboard-address">fooreo.com/admin</span>
+                <span></span>
+              </span>
+              <span class="dashboard-screen"><img src="./assets/images/fooreo-owner-dashboard.jpg" width="1366" height="629" loading="lazy" alt="Owner-facing Fooreo dashboard showing plan management, customers and subscription scheduling"></span>
+            </span>
             <span class="dashboard-expand" aria-hidden="true">View larger ↗</span>
           </button>
           <figcaption>An owner-facing Fooreo dashboard used for plan management, customers and subscription scheduling.</figcaption>
@@ -165,19 +164,6 @@
         <p class="body-text operations-reflection">This was where I learned that a good consumer experience depends on operational systems working reliably behind it. When schedules, partners, deliveries or support fail, the customer experiences it as one broken product.</p>
       </section>
 
-      <section class="scope-section" aria-labelledby="scope-title">
-        <p class="eyebrow">The work around the app</p>
-        <h2 id="scope-title" class="section-title">Building one marketplace meant working across several products at once.</h2>
-        <ul class="scope-list">
-          <li>Customer discovery and marketplace experience</li>
-          <li>Restaurant partner onboarding</li>
-          <li>Plan and subscription logic</li>
-          <li>Owner-facing workflows</li>
-          <li>Delivery and customer exceptions</li>
-          <li>Launch and early revenue</li>
-        </ul>
-      </section>
-
       <section class="lessons-section" aria-labelledby="lessons-title">
         <p class="eyebrow">A clear limit</p>
         <h2 id="lessons-title" class="section-title">What I learned, including the uncomfortable parts.</h2>
@@ -190,7 +176,7 @@
 
       <section id="why-calo" class="why-calo-section" aria-labelledby="why-calo-title">
         <p class="eyebrow">Why this exists</p>
-        <h2 id="why-calo-title" class="section-title">I built this page for Calo.</h2>
+        <h2 id="why-calo-title" class="section-title">I built this page for <span class="calo-wordmark">CALO.</span></h2>
         <div class="prose-stack">
           <p class="body-text">Calo is working on the version of this problem I did not get to reach: connecting the customer experience to kitchens, capacity, supply chain, logistics and the internal tools that hold the operation together.</p>
           <p class="body-text">I am not presenting myself as a conventional Senior Product Manager. I am interested in the right Product Manager, Associate Product Manager, Product Operations or marketplace opportunity where my experience can be useful and where I can grow into the scale of the problem.</p>

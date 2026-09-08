@@ -87,6 +87,23 @@ if (originStory) {
   }
 }
 
+const journeyItems = document.querySelectorAll('.journey-item')
+
+if (!prefersReducedMotion.matches && 'IntersectionObserver' in window && journeyItems.length) {
+  journeyItems.forEach((item) => item.classList.add('is-pending-reveal'))
+
+  const journeyObserver = new IntersectionObserver((entries, observer) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.remove('is-pending-reveal')
+        observer.unobserve(entry.target)
+      }
+    })
+  }, { threshold: 0.18 })
+
+  journeyItems.forEach((item) => journeyObserver.observe(item))
+}
+
 const lightbox = document.querySelector('.image-lightbox')
 const lightboxImage = lightbox?.querySelector('.lightbox-image')
 const lightboxClose = lightbox?.querySelector('.lightbox-close')

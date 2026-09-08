@@ -9,7 +9,7 @@ a {
 a:focus-visible,
 button:focus-visible,
 video:focus-visible {
-  outline: 3px solid #cf0aa8;
+  outline: 2px solid #141414;
   outline-offset: 4px;
 }
 
@@ -59,32 +59,35 @@ video:focus-visible {
 }
 
 .button {
-  min-height: 42px;
-  padding: 8px 16px;
+  min-height: auto;
+  padding: 0;
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  border: 3px solid #141414;
-  border-radius: 50px;
+  gap: 4px;
+  border: 0;
+  border-radius: 0;
   color: #141414;
   font-size: 14px;
-  font-weight: 700;
-  text-decoration: none;
+  font-weight: 500;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
 }
 
 .button:hover {
-  color: #fff;
-  background: #141414;
+  color: #141414;
+  background: transparent;
+  text-decoration-thickness: 2px;
 }
 
 .button-secondary {
-  color: #fff;
-  background: #141414;
+  color: #141414;
+  background: transparent;
 }
 
 .button-secondary:hover {
   color: #141414;
-  background: #fff;
+  background: transparent;
 }
 
 .right-arrow-icon {
@@ -93,26 +96,13 @@ video:focus-visible {
   margin-top: 1px;
 }
 
-.button:hover .right-arrow-icon,
-.button-secondary {
-  filter: none;
-}
-
-.button:not(.button-secondary):hover .right-arrow-icon {
-  filter: invert(1);
-}
-
-.button-secondary .right-arrow-icon {
-  filter: invert(1);
-}
-
-.button-secondary:hover .right-arrow-icon {
+.button .right-arrow-icon {
   filter: none;
 }
 
 .text-link {
   font-size: 14px;
-  font-weight: 700;
+  font-weight: 500;
   text-underline-offset: 3px;
   text-decoration-thickness: 1px;
 }
@@ -128,5 +118,5 @@ video:focus-visible {
 }
 
 .button-placeholder {
-  border-color: #666;
+  border: 0;
 }
